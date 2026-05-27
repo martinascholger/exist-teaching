@@ -1,0 +1,49 @@
+<collection xmlns="http://exist-db.org/collection-config/1.0">
+    <!-- Index-Einträge für persons -->
+    <index xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <range>
+            <create qname="tei:persName" type="xs:string"/>
+            <create qname="tei:forename" type="xs:string"/>
+            <create qname="tei:surname" type="xs:string"/>
+            <create qname="tei:sex" type="xs:string"/>
+            <create qname="tei:placeName" type="xs:string"/>
+            <create qname="tei:settlement" type="xs:string" nested="yes"/>
+            <create qname="tei:occupation" type="xs:string"/>
+            <create qname="tei:idno" type="xs:string"/>
+            <!-- Extra index for @when needed for query:getTodaysEvents() -->
+            <create qname="@when" type="xs:string"/>
+            <create qname="@type" type="xs:string"/>
+            <create qname="tei:date">
+                <field name="date-when" match="@when" type="xs:string"/>
+                <field name="date-notBefore" match="@notBefore" type="xs:string"/>
+                <field name="date-notAfter" match="@notAfter" type="xs:string"/>
+                <field name="date-from" match="@from" type="xs:string"/>
+                <field name="date-to" match="@to" type="xs:string"/>
+            </create>
+            <create qname="@source" type="xs:string"/>
+            <create qname="@status" type="xs:string"/>
+            <create qname="@key" type="xs:string"/>
+            <create qname="@target" type="xs:string"/>
+        </range>
+        <fulltext default="none" attributes="false"/>
+        <lucene diacritics="no">
+            <analyzer class="org.exist.indexing.lucene.analyzers.NoDiacriticsStandardAnalyzer">
+                <param name="stopwords" type="org.apache.lucene.analysis.util.CharArraySet"/>
+            </analyzer>
+            <module uri="http://data.weber-gesamtausgabe.de/modules/facets" prefix="facets" at="../facets.xqm"/>
+            <text qname="tei:person">
+                <facet dimension="surnames" expression=".//tei:surname"/>
+                <facet dimension="forenames" expression=".//tei:forename[not(@full)]"/>
+                <facet dimension="residences" expression=".//tei:settlement[ancestor::tei:residence]/@key"/>
+                <facet dimension="occupations" expression="tei:occupation"/>
+                <facet dimension="sex" expression="tei:sex"/>
+                <facet dimension="docSource" expression="@source"/>
+                <facet dimension="docStatus" expression="@status"/>
+                <facet dimension="docType" expression="'persons'"/>
+            </text>
+            <text qname="tei:persName" boost="2.0"/>
+            <inline qname="tei:hi"/>
+            <ignore qname="tei:sex"/>
+        </lucene>
+    </index>
+</collection>

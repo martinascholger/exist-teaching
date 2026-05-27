@@ -1,0 +1,27 @@
+<collection xmlns="http://exist-db.org/collection-config/1.0">
+    <!-- Index-Einträge für places -->
+    <index xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <range>
+            <create qname="tei:placeName" type="xs:string"/>
+            <create qname="tei:idno" type="xs:string"/>
+            <create qname="tei:label" type="xs:string"/>
+            <create qname="@type" type="xs:string"/>
+            <create qname="@target" type="xs:string"/>
+            <create qname="@typeof" type="xs:string"/>
+        </range>
+        <fulltext default="none" attributes="false"/>
+        <lucene diacritics="no">
+            <analyzer class="org.exist.indexing.lucene.analyzers.NoDiacriticsStandardAnalyzer">
+                <param name="stopwords" type="org.apache.lucene.analysis.util.CharArraySet"/>
+            </analyzer>
+            <module uri="http://data.weber-gesamtausgabe.de/modules/facets" prefix="facets" at="../facets.xqm"/>
+            <text qname="tei:place">
+                <facet dimension="docStatus" expression="@status"/>
+                <facet dimension="placenames" expression="tei:placeName[@type]"/>
+                <facet dimension="docType" expression="'places'"/>
+            </text>
+            <text qname="tei:placeName" boost="2.0"/>
+            <inline qname="tei:hi"/>
+        </lucene>
+    </index>
+</collection>

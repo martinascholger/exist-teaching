@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<meta xmlns="http://exist-db.org/xquery/repo">
+    <description>WeGA-data-sample</description>
+    <author>Carl-Maria-von-Weber-Gesamtausgabe</author>
+    <website>https://zenodo.org/doi/10.5281/zenodo.3520700</website>
+    <status>dev</status>
+    <license>CC BY 4.0</license>
+    <copyright>true</copyright>
+    <type>library</type>
+    <target>WeGA-data</target>
+    <prepare>WeGA-data-pre-install.xql</prepare>
+</meta>

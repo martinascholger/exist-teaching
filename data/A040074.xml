@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/Vault/P5/4.7.0/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/Vault/P5/4.7.0/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="A040074">
+
+
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title level="s">WeGA, Briefe, Digitale Edition</title>
+            <title level="a">Carl Maria und Franz Anton von Weber an Johann Peter Heuschkel in
+               Hildburghausen <lb/>Salzburg, Donnerstag, 28. Dezember 1797 </title>
+            <author ref="https://weber-gesamtausgabe.de/A002068" xml:id="cmvweber">Weber, Carl Maria
+               von</author>
+            <author ref="https://weber-gesamtausgabe.de/A002074" xml:id="favweber">Weber, Franz
+               Anton von</author>
+            <editor>Carl-Maria-von-Weber-Gesamtausgabe</editor>
+            <respStmt>
+               <resp>Übertragung</resp>
+               <name>Eveline Bartlitz</name>
+               <name>Joachim Veit</name>
+            </respStmt>
+         </titleStmt>
+         <publicationStmt>
+            <publisher>
+               <name>Carl-Maria-von-Weber-Gesamtausgabe</name>
+               <address>
+                  <street>Hornsche Str. 39</street>
+                  <postCode>32756</postCode>
+                  <placeName>
+                     <country>D</country>
+                     <settlement ref="https://weber-gesamtausgabe.de/A130001">Detmold</settlement>
+                  </placeName>
+               </address>
+            </publisher>
+
+            <availability>
+               <licence target="http://creativecommons.org/licenses/by/4.0/">Creative Commons
+                  Attribution 4.0 International (CC BY 4.0)</licence>
+            </availability>
+            <idno type="WeGA"
+               ><!-- *** This is the permanent identifier for this document *** --><!-- *** Please cite this URI when referring to it *** -->http://weber-gesamtausgabe.de/A040074</idno>
+         </publicationStmt>
+         <seriesStmt>
+            <p>Machine-Readable Transcriptions of Texts from the Carl Maria von Weber Complete
+               Edition (WeGA)</p>
+         </seriesStmt>
+         <notesStmt>
+            <note type="summary">zum Neuen Jahr dankt er Heuschkel für seinen Unterricht, der ihm
+               schon große Ehre eingebracht habe; nach langer Suche will ihn nun Michael Haydn
+               annehmen, dem sein Vorspiel gefallen habe </note>
+            <note type="incipit">Der eintretende NeueJahrs Wechsel erinnert mich an die
+               Pflicht</note>
+         </notesStmt>
+         <sourceDesc>
+
+            <msDesc>
+               <msIdentifier>
+                  <country>D</country>
+                  <settlement ref="https://weber-gesamtausgabe.de/A130002">Berlin</settlement>
+                  <repository n="D-B">Staatsbibliothek zu Berlin – Preußischer Kulturbesitz,
+                     Musikabteilung</repository>
+                  <idno n="1">Mus. ep. C. M. v. Weber 8</idno>
+               </msIdentifier>
+               <physDesc>
+                  <p n="extent">1 DBl. (3 b. S. o. Adr.)</p>
+                  <p>mit Beischrift F. A.'s</p>
+                  <p>Bl. 1r: Carl Maria von Weber</p>
+                  <p>Bl. 1v und 2r: Franz Anton von Weber</p>
+               </physDesc>
+               <history>
+                  <provenance>Weber-Familiennachlass</provenance>
+               </history>
+               <additional>
+                  <listBibl>
+                     <msDesc rendition="#copy">
+                        <msIdentifier>
+                           <country>D</country>
+                           <settlement ref="https://weber-gesamtausgabe.de/A130002"
+                              >Berlin</settlement>
+                           <repository n="D-B">Staatsbibliothek zu Berlin – Preußischer
+                              Kulturbesitz, Musikabteilung</repository>
+                           <idno>Weberiana Cl. II B, 2a, Nr. 1, S. 797</idno>
+                        </msIdentifier>
+                     </msDesc>
+                     <bibl n="firstPrint">MMW I, S. 36f</bibl>
+                     <bibl>Worbs, S. 13–14 (unvollst.)</bibl>
+                  </listBibl>
+               </additional>
+            </msDesc>
+         </sourceDesc>
+      </fileDesc>
+      <encodingDesc>
+         <projectDesc>
+            <p>Carl-Maria-von-Weber-Gesamtausgabe, Sämtliche Briefe</p>
+         </projectDesc>
+         <editorialDecl>
+            <p>Übertragung folgt den ER der WeGA</p>
+         </editorialDecl>
+         <tagsDecl>
+            <rendition xml:id="latintype" scheme="css">font-style: italic;</rendition>
+            <rendition xml:id="italic" scheme="css">font-style: italic;</rendition>
+            <rendition xml:id="underline" scheme="css">text-decoration: underline;</rendition>
+            <rendition xml:id="superscript" scheme="css">vertical-align: super; font-size: 0.8em;
+               line-height: 0.7em;</rendition>
+            <rendition xml:id="subscript" scheme="css">vertical-align: sub; font-size: 0.8em;
+               line-height: 0.7em;</rendition>
+            <rendition xml:id="center" scheme="css">display: block; text-align: center;</rendition>
+            <rendition xml:id="right" scheme="css">display: block; text-align: right;</rendition>
+            <rendition xml:id="antiqua" scheme="css">font-style: italic;</rendition>
+            <rendition xml:id="left" scheme="css">display: block; text-align: left;</rendition>
+            <rendition xml:id="spaced_out" scheme="css">letter-spacing: 0.15em;</rendition>
+            <rendition xml:id="smaller" scheme="css">font-size: smaller;</rendition>
+            <rendition xml:id="bold" scheme="css">font-weight: bold;</rendition>
+            <rendition xml:id="small-caps" scheme="css">font-variant: small-caps;</rendition>
+            <rendition xml:id="double-quotes-before" scheme="css" scope="before">content:
+               '"'</rendition>
+            <rendition xml:id="double-quotes-after" scheme="css" scope="after">content:
+               '"'</rendition>
+            <rendition xml:id="single-quotes-before" scheme="css" scope="before">content:
+               "'";</rendition>
+            <rendition xml:id="single-quotes-after" scheme="css" scope="after">content:
+               "'";</rendition>
+         </tagsDecl>
+      </encodingDesc>
+      <profileDesc>
+         <correspDesc>
+            <correspAction type="sent">
+               <persName ref="https://weber-gesamtausgabe.de/A002068">Weber, Carl Maria
+                  von</persName>
+               <persName ref="https://weber-gesamtausgabe.de/A002074">Weber, Franz Anton
+                  von</persName>
+               <settlement ref="https://weber-gesamtausgabe.de/A130023">Salzburg</settlement>
+               <date when="1797-12-28" n="02">28. Dezember 1797</date>
+            </correspAction>
+            <correspAction type="received">
+               <persName ref="https://weber-gesamtausgabe.de/A000835">Heuschkel, Johann
+                  Peter</persName>
+               <settlement ref="https://weber-gesamtausgabe.de/A130061">Hildburghausen</settlement>
+            </correspAction>
+         </correspDesc>
+         <langUsage>
+            <language ident="de">German</language>
+         </langUsage>
+      </profileDesc>
+      <revisionDesc status="approved">
+         <change who="PS" when="2023-05-02">Obsoletes Element tei:textClass entfernt</change>
+         <change who="SS" when="2021-08-20">addSpan eingetragen</change>
+         <change who="PS" when="2020-09-18" status="approved">Status nach Durchsicht von Frank
+            Ziegler auf 'approved' gesetzt</change>
+         <change when="2015-06-09" who="PS">Faksimiles hinzugefügt</change>
+         <change when="2015-06-03" who="EB">Brieftexte am Autograph gegengelesen,korrigiert und
+            ausgezeichnet</change>
+         <change who="AS" when="2012-05-29">kleine Korrekturen</change>
+         <change when="2012-05-04" who="AF">status changed auf candidate, Header angepasst, Brief
+            eingefügt</change>
+         <change when="2011-04-03" who="PS">ID und @keys gegen nicht-sprechende ersetzt.</change>
+         <change who="PS" when="2009-05-08">Initiale Transformation aus askSam DB Briefe1</change>
+      </revisionDesc>
+   </teiHeader>
+   <facsimile>
+      <graphic
+         url="https://weber-gesamtausgabe.de/Scaler/IIIF/letters%2FA0400xx%2FA040074%2FA040074_1.jpg/full/,600/0/native.jpg"/>
+      <graphic
+         url="https://weber-gesamtausgabe.de/Scaler/IIIF/letters%2FA0400xx%2FA040074%2FA040074_2.jpg/full/,600/0/native.jpg"/>
+      <graphic
+         url="https://weber-gesamtausgabe.de/Scaler/IIIF/letters%2FA0400xx%2FA040074%2FA040074_3.jpg/full/,600/0/native.jpg"
+      />
+   </facsimile>
+   <text type="letter">
+      <body>
+         <div hand="#cmvweber" type="writingSession" n="1">
+            <opener>
+               <salute>Hochedelgebohrener Herr <rs type="person"
+                     ref="https://weber-gesamtausgabe.de/A000835">Kammer Musicus</rs>.<lb/> Mein
+                  Theuerster Geliebtester Lehrer!</salute>
+            </opener>
+            <p>Der eintretende NeueJahrs Wechsel erinnert mich an die Pflicht, Ihnen mein Theuerster
+                  <rs type="person" ref="https://weber-gesamtausgabe.de/A000835">Lehrer</rs> meinen
+               Herzinnigsten GlükWunsch abzustatten, der Himmel erhalte sie noch lange Jahre im
+               bestem wohl sein, noch habe leider keinen so guten Lehrer gefunden, als ich an Ihnen
+               verlohr, und habe wegen diesem, was ich von ihnen gelernt, schon Oft grosse Ehre
+               eingeärndet. nach vieler Mühe, hat es endlich mein Hℓ: <rs type="person"
+                  ref="https://weber-gesamtausgabe.de/A002074">Vater</rs> dahin gebracht, daß ich
+               dieses NeueJahr, bey Hℓ: <hi rendition="#latintype">Capell</hi> Meister <persName
+                  ref="https://weber-gesamtausgabe.de/A000778">Michel Haydn</persName> den <hi
+                  rendition="#latintype">Contrapu<supplied>n</supplied>ct</hi> anfange, da Er mich
+               auf seinem Zimmer das <del rendition="#strikethrough"><hi rendition="#latintype"
+                     >Coce</hi></del>
+               <hi rendition="#latintype">Concert</hi>
+               <damage agent="paperloss"><supplied resp="EB">vo</supplied></damage>n <persName
+                  ref="https://weber-gesamtausgabe.de/A001057"><hi rendition="#latintype"
+                     >Kozeluch</hi></persName>, einige Variazionen, etwas von <persName
+                  ref="https://weber-gesamtausgabe.de/A001577"><hi rendition="#latintype"
+                     >Rhigini</hi></persName> lidern, <damage agent="paperloss"><supplied resp="EB"
+                     >und</supplied></damage> ein <hi rendition="#latintype">Recitativ</hi> auß dem
+                  <name type="artificialWork" ref="https://weber-gesamtausgabe.de/A020397">Tod
+                  Jesu</name> spielen gehört, und grossen B<damage agent="paperloss"><supplied
+                     resp="EB">eyfa</supplied></damage>ll gegeben hat. es ist ein Glück für mich,
+               denn er nimmt sonst keine <damage agent="paperloss"><supplied resp="EB"
+                  >Sc</supplied></damage>hüler mehr an, weilen er gar zu viel zu thun hat. liber Hℓ:
+                  <persName ref="https://weber-gesamtausgabe.de/A000835"><hi rendition="#latintype"
+                        >Heu<damage agent="paperloss"><supplied resp="EB"
+                     >sc</supplied></damage>hkel</hi></persName>, vergessen sie mich ja nicht, so
+               wie ich ewig an Sie Gedenke. Darf ich bitten die Einlage an <persName
+                  ref="https://weber-gesamtausgabe.de/A001944">Hℓ: Tertius</persName> gütigst zu
+               bestellen.</p>
+            <closer rendition="#inline"> der ich in Erwartung einer baldig Gütigen Antwort,
+               zeitlebens mit wahrer Achtung bin<lb/>
+               <seg rendition="#right">Ihr</seg>
+               <seg rendition="#right">getreuer Schüler. <persName
+                     ref="https://weber-gesamtausgabe.de/A002068"><hi rendition="#latintype">Carl v.
+                        Weber</hi></persName>.</seg>
+               <dateline><settlement ref="https://weber-gesamtausgabe.de/A130023"
+                     >Salzburg</settlement> d 28 Xbris. 1797.</dateline><pb/>
+            </closer>
+         </div>
+         <addSpan hand="#favweber" spanTo="#favweber_end"/>
+         <div n="2" type="writingSession">
+            <opener><supplied>Fortsetzung des Vaters:</supplied>
+               <salute>Mein Lieber Herr Kammer Musikus!</salute>
+            </opener>
+            <p>Viel Glük Zum Neuen Jahre! behalten sie mich in diesem Jahre so lieb, wie ich sie so
+               herzlich liebe, und vergeßen uns nicht, täglich sprechen wir von Ihnen. einen solchen
+               braven treuen, und fleisigen Lehrer bekomt Carl nicht wider, wie er leyder an Ihnen
+               verlohren, und darum bereue es sehr oft, das ich von <settlement
+                  ref="https://weber-gesamtausgabe.de/A130061">Hildburgh</settlement> weggegangen
+               bin; es fehlt hier nicht an grosen Leuten, aber es sind lauter liederliche versoffene
+               Kerls, denn der Wein ist zu wohlfeil, die halbe Bout<supplied>eille</supplied> 6x<hi
+                  rendition="#superscript">er</hi>. mit der grösten Mühe habe <persName
+                  ref="https://weber-gesamtausgabe.de/A000778">Hℓ Michel Haydn</persName> durch
+               vieles Bitten da<damage agent="paperloss"><supplied resp="EB">hin</supplied></damage>
+               gebracht, das er den <persName ref="https://weber-gesamtausgabe.de/A002068"><hi
+                     rendition="#latintype">Carl</hi></persName> angenommen und NeuJahr den <hi
+                  rendition="#latintype">Contrapunct</hi> mit Ihm anf<damage agent="paperloss"
+                     ><supplied resp="EB">angen</supplied></damage> will, er hat vile Freude
+               gezeigt, als ich mit <hi rendition="#latintype">Carl</hi> bey Ihm war, und a<damage
+                  agent="paperloss"><supplied resp="EB">uf seinem</supplied></damage> Zimmer den
+               Knaben spielen gehört hat. ach! ein solches <hi rendition="#latintype"
+                  >fortepiano</hi>
+               <damage agent="paperloss"><supplied resp="EB">wünsche</supplied></damage> ich Ihnen,
+               wie man sie hier izt hat, aber das Geringste kostet 30 <hi rendition="#latintype"
+                  >Carolin</hi>
+               <damage agent="paperloss"><supplied resp="EB">oder</supplied></damage> 120 Laubthaler
+               aber es ist nicht auszusprechen, welch eine Schönheit und Gleichheit der Töne, und
+                  <unclear>Gewalt</unclear>. im Starken und Sanften gleich. Bald hoffe ich Ihnen ein
+               schönes <hi rendition="#latintype">oboe Concert</hi> zu schicken, es wäre schon
+               geschehen, wenn <rs type="person" ref="https://weber-gesamtausgabe.de/A002077">meine
+                  arme Frau</rs> nicht dem Todte so nahe gewesen, da sie schon drei ganze Monath
+               Elendt zu Bette ligt. sie läßt sie herzlich grüßen, <rs type="person"
+                  ref="https://weber-gesamtausgabe.de/A002061">Frau Schwester</rs> nicht minder,
+               mein <rs type="person" ref="https://weber-gesamtausgabe.de/A002071">Sohn</rs>, der in
+                  <settlement ref="https://weber-gesamtausgabe.de/A130061">Hildburgh</settlement>
+               war, ist izt in <settlement ref="https://weber-gesamtausgabe.de/A130019"
+                  >Caßel</settlement> also näher bei Ihnen als bei mir.</p>
+            <closer rendition="#inline"> Leben sie wohl, und vergeßen sie mich nicht, ich bin und
+               bleibe mit wahrer Achtung und Freundtschaft Ihr wahrer Freundt. <lb/>
+               <seg rendition="#right"><hi rendition="#latintype"><persName
+                        ref="https://weber-gesamtausgabe.de/A002074">F: A: v:
+                  Weber</persName></hi></seg>
+               <dateline><settlement ref="https://weber-gesamtausgabe.de/A130023"><hi
+                        rendition="#latintype">Salzburg</hi></settlement> d 28 X<hi
+                     rendition="#superscript">bris</hi>
+                  <hi rendition="#underline" n="1">1797.</hi></dateline></closer>
+            <postscript>
+               <p><hi rendition="#latintype">Adresse</hi>.<lb/> H <hi rendition="#latintype">Major
+                        <persName ref="https://weber-gesamtausgabe.de/A002074">F. A: B. von
+                        Weber</persName></hi><lb/>
+                  <hi rendition="#latintype"><settlement
+                        ref="https://weber-gesamtausgabe.de/A130023"
+                  >Salzburg</settlement></hi>.<pb/>
+               </p>
+            </postscript>
+            <postscript>
+               <p>N: S: ein <hi rendition="#latintype">Compl<supplied>iment</supplied></hi> an
+                     <persName ref="https://weber-gesamtausgabe.de/A000641">H. Gleichmann</persName>
+                  von mir und <hi rendition="#latintype"><persName
+                        ref="https://weber-gesamtausgabe.de/A002068">Carl</persName></hi>. schreiben
+                  Sie mir auch was Neues von <settlement
+                     ref="https://weber-gesamtausgabe.de/A130061">Hildbgh</settlement>. <hi
+                     rendition="#latintype">adieu</hi> leben Sie wohl!</p>
+               <note xml:id="tC_01" type="textConst" resp="PS">diese Nachschrift steht am oberen
+                  Rand von Bl. 2r</note>
+            </postscript>
+         </div>
+         <anchor xml:id="favweber_end"/>
+      </body>
+   </text>
+</TEI>

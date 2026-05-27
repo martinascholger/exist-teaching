@@ -1,0 +1,32 @@
+<collection xmlns="http://exist-db.org/collection-config/1.0">
+    <!-- Index-Einträge für works -->
+    <index xmlns:mei="http://www.music-encoding.org/ns/mei" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <range>
+            <create qname="mei:altId" type="xs:string"/>
+            <create qname="mei:title" type="xs:string"/>
+            <create qname="@codedval" type="xs:string"/>
+            <create qname="@isodate" type="xs:string"/>
+            <create qname="@type" type="xs:string"/>
+            <create qname="@role" type="xs:string"/>
+            <create qname="@level" type="xs:string"/>
+            <create qname="@n" type="xs:string"/>
+        </range>
+        <fulltext default="none" attributes="false"/>
+        <lucene diacritics="no">
+            <analyzer class="org.exist.indexing.lucene.analyzers.NoDiacriticsStandardAnalyzer">
+                <param name="stopwords" type="org.apache.lucene.analysis.util.CharArraySet"/>
+            </analyzer>
+            <module uri="http://data.weber-gesamtausgabe.de/modules/facets" prefix="facets" at="../facets.xqm"/>
+            <text qname="mei:mei">
+                <facet dimension="composers" expression=".//mei:persName[@role='cmp']/@codedval"/>
+                <facet dimension="librettists" expression=".//mei:persName[@role='lbt']/@codedval"/>
+                <facet dimension="lyricists" expression=".//mei:persName[@role='lyr']/@codedval"/>
+                <facet dimension="dedicatees" expression=".//mei:persName[@role='dte']/@codedval"/>
+                <facet dimension="series" expression=".//mei:seriesStmt/mei:title[@level='s']"/><!-- Weber-GA Reihen -->
+            </text>
+            <text qname="mei:title" boost="2.0"/>
+            <text qname="mei:persName"/>
+            <inline qname="mei:render"/>
+        </lucene>
+    </index>
+</collection>

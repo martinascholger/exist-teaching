@@ -1,0 +1,53 @@
+<collection xmlns="http://exist-db.org/collection-config/1.0">
+    <!-- Index-Einträge für orgs -->
+    <index xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <range>
+            <create qname="tei:orgName" type="xs:string"/>
+            <create qname="tei:placeName" type="xs:string"/>
+            <create qname="tei:settlement" type="xs:string" nested="yes"/>
+            <create qname="tei:label" type="xs:string"/>
+            <create qname="tei:idno" type="xs:string"/>
+            <create qname="tei:desc" type="xs:string"/>
+            <create qname="@type" type="xs:string"/>
+            <create qname="@when" type="xs:string"/>
+            <create qname="@notBefore" type="xs:string"/>
+            <create qname="@notAfter" type="xs:string"/>
+            <create qname="@from" type="xs:string"/>
+            <create qname="@to" type="xs:string"/>
+            <create qname="@status" type="xs:string"/>
+            <create qname="@key" type="xs:string"/>
+            <create qname="@target" type="xs:string"/>
+        </range>
+        <fulltext default="none" attributes="false"/>
+        <lucene diacritics="no">
+            <analyzer class="org.exist.indexing.lucene.analyzers.NoDiacriticsStandardAnalyzer">
+                <param name="stopwords" type="org.apache.lucene.analysis.util.CharArraySet"/>
+            </analyzer>
+            <module uri="http://data.weber-gesamtausgabe.de/modules/facets" prefix="facets" at="../facets.xqm"/>
+            <text qname="tei:org">
+                <facet dimension="surnames" expression=".//tei:orgName[@type]"/>
+                <!--<facet dimension="forenames" expression="@status"/>-->
+                <facet dimension="residences" expression=".//tei:label[.='Ort']/following-sibling::tei:desc/tei:settlement/@key"/>
+                <facet dimension="occupations" expression=".//tei:label[.='Art der Institution']/following-sibling::tei:desc"/>
+                <facet dimension="sex" expression=".//tei:label[.='Art der Institution']"/>
+                <facet dimension="docSource" expression="'WeGA'"/>
+                <facet dimension="docStatus" expression="@status"/>
+                <facet dimension="docType" expression="'orgs'"/>
+            </text>
+            <text qname="tei:orgName" boost="2.0"/>
+            <inline qname="tei:hi"/>
+            <inline qname="tei:lb"/>
+            <inline qname="tei:pb"/>
+            <inline qname="tei:cb"/>
+            <inline qname="tei:supplied"/>
+            <inline qname="tei:subst"/>
+            <inline qname="tei:del"/>
+            <inline qname="tei:add"/>
+            <inline qname="tei:sic"/>
+            <inline qname="tei:corr"/>
+            <inline qname="tei:damage"/>
+            <ignore qname="tei:gap"/>
+            <ignore qname="tei:space"/>
+        </lucene>
+    </index>
+</collection>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://expath.org/ns/pkg" name="http://weber-gesamtausgabe.de/data-sample"
+    abbrev="WeGA-data-sample" version="4.11.0" spec="1.0">
+    <title>WeGA-data-sample</title>
+</package>

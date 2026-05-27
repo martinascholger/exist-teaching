@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/Vault/P5/4.7.0/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/Vault/P5/4.7.0/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="A040043">
+
+
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title level="a">Carl Maria von Weber
+               <lb/> Albumblatt für Elise Vigitill
+               <lb/> Nürnberg, Montag, 10. September 1792
+            </title>
+            <title level="s">WeGA, Albumblätter, Digitale Edition</title>
+            <author ref="https://weber-gesamtausgabe.de/A002068">Weber, Carl Maria von</author>
+            <editor>Carl-Maria-von-Weber-Gesamtausgabe</editor>
+            <respStmt>
+               <resp>Übertragung</resp>
+               <name>Eveline Bartlitz</name>
+               <name>Joachim Veit</name>
+            </respStmt>
+         </titleStmt>
+         <publicationStmt>
+            <publisher>
+               <name>Carl-Maria-von-Weber-Gesamtausgabe</name>
+               <address>
+                  <street>Hornsche Str. 39</street>
+                  <postCode>32756</postCode>
+                  <placeName>
+                     <country>D</country>
+                     <settlement ref="https://weber-gesamtausgabe.de/A130001">Detmold</settlement>
+                  </placeName>
+               </address>
+            </publisher>
+            
+            <availability>
+               <licence target="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International (CC BY 4.0)</licence>
+            </availability>
+         <idno type="WeGA"><!-- *** This is the permanent identifier for this document *** --><!-- *** Please cite this URI when referring to it *** -->http://weber-gesamtausgabe.de/A040043</idno></publicationStmt>
+         <seriesStmt>
+            <p>Machine-Readable Transcriptions of Texts from the Carl Maria von Weber Complete Edition (WeGA)</p>
+         </seriesStmt>
+         <notesStmt>
+            <note type="summary">Stammbucheintrag für Elise Vigitill, <q>im 6ten Jahr seines Alters</q> (Blatt mit Bleistift vorliniert)</note>
+            <note type="incipit">Lieben Sie Beste Elise alzeit Ihr aufrichtiger</note>
+         </notesStmt>
+         <sourceDesc>
+            
+            <msDesc>
+               <msIdentifier>
+                  <country>D</country>
+                  <settlement ref="https://weber-gesamtausgabe.de/A130002">Berlin</settlement>
+                  <repository n="D-B">Staatsbibliothek zu Berlin – Preußischer Kulturbesitz, Musikabteilung</repository>
+                  <idno>Weberiana Cl. II A f 4, Nr. 27ɑ</idno>
+               </msIdentifier>
+               <physDesc>
+                  <p n="extent">1 Bl. (1 b. S.)</p>
+                  <p>auf der verso-Seite oben Eintrag von Jähns: <hi rendition="#underline" n="1">Umstehend</hi>: Ältestes vorhandenes Schriftstück von <hi rendition="#latintype">Carl Maria v. Weber's</hi> Hand.<lb/><hi rendition="#latintype">F. W. Jähns.</hi>
+                  </p>
+                  <p>am unteren Rand vermerkt: <hi rendition="#underline" n="1">Carl Maria von <hi rendition="#latintype">Weber</hi></hi> der berühmte Componist geboren zu <hi rendition="#latintype">Eutin</hi> den 18. <hi rendition="#latintype">Decbr</hi> 1786. Stammbuchblatt. d. v. Nürnberg, wo sich sein Vater, der Major <add place="below">nach <hi rendition="#latintype">Webers</hi> Taufschein Capellmeister</add> war, niedergelassen – 1796 ging er nach <hi rendition="#latintype">Hildburghausen</hi>. 1798 nach <hi rendition="#latintype">Sal<supplied>z</supplied>burg</hi> und <hi rendition="#latintype">München.</hi> starb in <hi rendition="#latintype">London</hi> am 5. <hi rendition="#latintype">Juni</hi> 1826. <lb/>(siehe: <hi rendition="#latintype">Schiling, Gerber</hi>. und <hi rendition="#latintype">Webers</hi> hinterl. Schriften.)
+                  </p>
+               </physDesc>
+               <additional>
+                  <listBibl>
+                     <bibl n="firstPrint">MMW I, S. 23</bibl>
+                     <bibl>Jähns (Werke), Anhang, Tafel II, Nr. 1 (vollst. Faks.-Nachahmung)</bibl>
+                     <bibl>Kleefeld, Wilhelm: Carl Maria von Weber. Bielefeld 1926, S. 13 (Faks.)</bibl>
+                  </listBibl>
+               </additional>
+            </msDesc>
+         </sourceDesc>
+      </fileDesc>
+      <encodingDesc>
+         <projectDesc>
+            <p>Carl-Maria-von-Weber-Gesamtausgabe, Sämtliche Briefe</p>
+         </projectDesc>
+         <editorialDecl>
+            <p>Übertragung folgt den ER der WeGA</p>
+            <p>Die Anordnung der Textteile wurde im Sinne der WeGA normalisiert; die Textvorlage erlaubt unterschiedliche Deutungen der Zusammengehörigkeit der Textteile</p>
+         </editorialDecl>
+      <tagsDecl><rendition xml:id="latintype" scheme="css">font-style: italic;</rendition><rendition xml:id="italic" scheme="css">font-style: italic;</rendition><rendition xml:id="underline" scheme="css">text-decoration: underline;</rendition><rendition xml:id="superscript" scheme="css">vertical-align: super; font-size: 0.8em; line-height: 0.7em;</rendition><rendition xml:id="subscript" scheme="css">vertical-align: sub; font-size: 0.8em; line-height: 0.7em;</rendition><rendition xml:id="center" scheme="css">display: block; text-align: center;</rendition><rendition xml:id="right" scheme="css">display: block; text-align: right;</rendition><rendition xml:id="antiqua" scheme="css">font-style: italic;</rendition><rendition xml:id="left" scheme="css">display: block; text-align: left;</rendition><rendition xml:id="spaced_out" scheme="css">letter-spacing: 0.15em;</rendition><rendition xml:id="smaller" scheme="css">font-size: smaller;</rendition><rendition xml:id="bold" scheme="css">font-weight: bold;</rendition><rendition xml:id="small-caps" scheme="css">font-variant: small-caps;</rendition><rendition xml:id="double-quotes-before" scheme="css" scope="before">content: '"'</rendition><rendition xml:id="double-quotes-after" scheme="css" scope="after">content: '"'</rendition><rendition xml:id="single-quotes-before" scheme="css" scope="before">content: "'";</rendition><rendition xml:id="single-quotes-after" scheme="css" scope="after">content: "'";</rendition></tagsDecl></encodingDesc>
+      <profileDesc>
+         <correspDesc>
+            <correspAction type="sent">
+               <persName ref="https://weber-gesamtausgabe.de/A002068">Weber, Carl Maria von</persName>
+               <settlement ref="https://weber-gesamtausgabe.de/A130026">Nürnberg</settlement>
+               <date when="1792-09-10" n="02">10. September 1792</date>
+            </correspAction>
+            <correspAction type="received">
+               <persName ref="https://weber-gesamtausgabe.de/A002018">Vigitill, Elise</persName>
+            </correspAction>
+         </correspDesc>
+         <langUsage>
+            <language ident="de">German</language>
+         </langUsage>
+      </profileDesc>
+      <revisionDesc status="approved">
+         <change who="PS" when="2023-05-02">Obsoletes Element tei:textClass entfernt</change>
+         <change who="PS" when="2020-09-18" status="approved">Status nach Durchsicht von Frank Ziegler auf 'approved' gesetzt</change>
+         <change when="2014-05-01" who="RM">Titel ergänzt</change>
+         <change when="2014-02-10" who="AK">Texttyp zu Albumblatt geändert.</change>
+         <change when="2012-04-05" who="AF" status="candidate">kleine Korrekturen</change>
+         <change when="2011-05-31" who="PS" status="candidate">Auf candidate gesetzt</change>
+         <change when="2011-05-31" who="JV">Angaben der Rückseite und Verweis auf Faksimile zugefügt</change>
+         <change when="2011-05-24" who="JV">Text eingefügt</change>
+         <change when="2011-04-03" who="PS">ID und @keys gegen nicht-sprechende ersetzt.</change>
+         <change who="PS" when="2009-05-08">Initiale Transformation aus askSam DB Briefe1</change>
+      </revisionDesc>
+   </teiHeader>
+   <facsimile>
+      <graphic url="https://weber-gesamtausgabe.de/Scaler/IIIF/letters%2FA0400xx%2FA040043%2F1792-09-10_01_AM_Weber_an_Vigitill_D-B_1r.jpg/full/,600/0/native.jpg" xml:id="facs_1r"/>
+      <graphic url="https://weber-gesamtausgabe.de/Scaler/IIIF/letters%2FA0400xx%2FA040043%2F1792-09-10_01_AM_Weber_an_Vigitill_D-B_1v.jpg/full/,600/0/native.jpg" xml:id="facs_1v"/>
+   </facsimile>
+   <text type="albumblatt">
+      <body>
+         <div type="writingSession" n="1">
+            <p>Lieben Sie Beste <persName ref="https://weber-gesamtausgabe.de/A002018">Elise</persName> alzeit</p>
+            <closer><seg rendition="#right">Ihr aufrichtiger<lb/></seg>
+               <seg rendition="#right">freund <persName ref="https://weber-gesamtausgabe.de/A002068">Carl v: Weber</persName><lb/></seg><seg rendition="#right">im 6ten Jahre seines<lb/>
+               alters</seg>
+            <dateline rendition="#left"><settlement ref="https://weber-gesamtausgabe.de/A130026">Nürnberg</settlement> den 10 7<hi rendition="#superscript">ber</hi><lb/>1792</dateline></closer>
+         </div>
+      </body>
+   </text>
+</TEI>

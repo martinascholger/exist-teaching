@@ -1,0 +1,73 @@
+<collection xmlns="http://exist-db.org/collection-config/1.0">
+    <!-- Index-Einträge für letters -->
+    <index xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <range>
+            <create qname="tei:settlement" type="xs:string" nested="yes"/>
+            <create qname="tei:placeName" type="xs:string"/>
+            <create qname="@key" type="xs:string"/>
+            <create qname="@status" type="xs:string"/>
+            <create qname="@type" type="xs:string"/>
+            <!-- Extra index for @when needed for query:getTodaysEvents() -->
+            <create qname="@when" type="xs:string"/>
+            <create qname="@target" type="xs:string"/>
+            <create qname="@n" type="xs:string"/>
+            <create qname="@ident" type="xs:string"/>
+            <create qname="tei:repository">
+                <field name="rism-siglum" match="@n" type="xs:string"/>
+            </create>
+            <create qname="tei:date">
+                <field name="date-when" match="@when" type="xs:string"/>
+                <field name="date-notBefore" match="@notBefore" type="xs:string"/>
+                <field name="date-notAfter" match="@notAfter" type="xs:string"/>
+                <field name="date-from" match="@from" type="xs:string"/>
+                <field name="date-to" match="@to" type="xs:string"/>
+            </create>
+        </range>
+        <fulltext default="none" attributes="false"/>
+        <lucene diacritics="no">
+            <analyzer class="org.exist.indexing.lucene.analyzers.NoDiacriticsStandardAnalyzer">
+                <param name="stopwords" type="org.apache.lucene.analysis.util.CharArraySet"/>
+            </analyzer>
+            <module uri="http://data.weber-gesamtausgabe.de/modules/facets" prefix="facets" at="../facets.xqm"/>
+            <text qname="tei:correspDesc" boost="2.0"/>
+            <text qname="tei:body"/>
+            <text qname="tei:note"/>
+            <text qname="tei:title" boost="2.0"/>
+            <text qname="tei:TEI">
+                <facet dimension="docTypeSubClass" expression="tei:text/@type"/>
+                <facet dimension="docStatus" expression="tei:teiHeader/tei:revisionDesc/@status"/>
+                <facet dimension="persons" expression="facets:persons(tei:text), facets:persons(.//tei:notesStmt)"/>
+                <facet dimension="works" expression="facets:works(tei:text), facets:works(.//tei:notesStmt)"/>
+                <facet dimension="addressee" expression="facets:persons(tei:teiHeader/tei:profileDesc/tei:correspDesc/tei:correspAction[@type='received'])"/>
+                <facet dimension="sender" expression="facets:persons(tei:teiHeader/tei:profileDesc/tei:correspDesc/tei:correspAction[@type='sent'])"/>
+                <facet dimension="placeOfAddressee" expression="tei:teiHeader/tei:profileDesc/tei:correspDesc/tei:correspAction[@type='received']/tei:settlement/@key"/>
+                <facet dimension="placeOfSender" expression="tei:teiHeader/tei:profileDesc/tei:correspDesc/tei:correspAction[@type='sent']/tei:settlement/@key"/>
+                <facet dimension="repository" expression="for $repo in .//tei:repository[@n] return concat($repo/preceding-sibling::tei:settlement, ' (', $repo/@n, ')')"/>
+                <facet dimension="facsimile" expression="facets:facsimile(.)"/>
+                <facet dimension="docType" expression="'letters'"/>
+                <field name="date" expression="facets:normalize-date(., 'letters')"/>
+                <ignore qname="tei:publicationStmt"/>
+                <ignore qname="tei:seriesStmt"/>
+                <ignore qname="tei:encodingDesc"/>
+                <ignore qname="tei:profileDesc"/>
+                <ignore qname="tei:revisionDesc"/>
+                <ignore qname="tei:respStmt"/>
+                <ignore qname="tei:editor"/>
+            </text>
+            <inline qname="tei:hi"/>
+            <inline qname="tei:lb"/>
+            <inline qname="tei:pb"/>
+            <inline qname="tei:cb"/>
+            <inline qname="tei:supplied"/>
+            <inline qname="tei:subst"/>
+            <inline qname="tei:del"/>
+            <inline qname="tei:add"/>
+            <inline qname="tei:sic"/>
+            <inline qname="tei:corr"/>
+            <inline qname="tei:damage"/>
+            <inline qname="tei:unclear"/>
+            <ignore qname="tei:gap"/>
+            <ignore qname="tei:space"/>
+        </lucene>
+    </index>
+</collection>
