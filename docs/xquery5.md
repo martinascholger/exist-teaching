@@ -151,6 +151,41 @@ return
 
 Testaufruf: http://localhost:8080/exist/apps/WeGA-data/tei2html.xq?id=A041627
 
+
+## tei2html.xsl
+
+```
+<xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:math="http://www.w3.org/2005/xpath-functions/math" exclude-result-prefixes="tei xs math" version="3.0">
+    
+    <xsl:template match="/">
+        <div>
+            <xsl:apply-templates select="tei:TEI/tei:text/tei:body/tei:div[@type='writingSession']"/>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="tei:opener | tei:closer | tei:p">
+        <p>
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
+    
+    <xsl:template match="tei:choice">
+        <xsl:apply-templates select="tei:expan"/>
+    </xsl:template>
+    
+    <xsl:template match="tei:abbr"/>
+    
+    <xsl:template match="tei:persName">
+        <a href="{@ref}">
+            <xsl:apply-templates/>
+        </a>
+    </xsl:template>
+    
+
+</xsl:stylesheet>
+
+```
+
 ## Links
 
 * [XQuery Wikibook](https://en.wikibooks.org/wiki/XQuery)
