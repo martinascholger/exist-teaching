@@ -212,12 +212,7 @@ Im HTML body
     </nav>
 
     <main class="container">
-        <h1>WeGA Data</h1>
-
-        <p class="lead">
-            This is a very simple eXist-db application for displaying TEI letters.
-        </p>
-
+       
         <h2>Letters</h2>
 
         <ul class="list-group">
