@@ -19,8 +19,7 @@ declare option output:omit-xml-declaration "yes";
 
 
 ## controller.xq
-```
-
+```xquery
 xquery version "3.1";
 
 declare variable $exist:path external;
