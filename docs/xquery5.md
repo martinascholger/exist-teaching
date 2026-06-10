@@ -19,21 +19,22 @@ declare option output:omit-xml-declaration "yes";
 
 
 ## controller.xq
-```xquery
+```
+
 xquery version "3.1";
 
-declare namespace exist="http://exist.sourceforge.net/NS/exist";
+declare variable $exist:path external;
 
-let $path := request:get-attribute("exist:path")
-return
-    if ($path = "" or $path = "/") then
-        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <redirect url="index.xq"/>
-        </dispatch>
-    else
-        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <cache-control cache="no"/>
-        </dispatch>
+if ($exist:path eq "/" or $exist:path eq "") then
+    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+        <redirect url="index.xq"/>
+    </dispatch>
+else
+    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+        <cache-control cache="yes"/>
+    </dispatch>
+    
+
 ```
 
 ## index.xq
