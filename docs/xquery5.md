@@ -273,20 +273,9 @@ return
         <title>Search</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"/>
-       
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom mb-4">
-            <div class="container">
-                <a class="navbar-brand" href="index.xq">WeGA Data</a>
-                <div class="navbar-nav">
-                    <a class="nav-link" href="index.xq">Letters</a>
-                    <a class="nav-link" href="search.xq">Search</a>
-                </div>
-            </div>
-        </nav>
-
-        <main class="container">
+        <main class="container mt-4">
             <h1>Search</h1>
 
             <form method="get" action="search.xq" class="row g-2 mb-4">
@@ -300,33 +289,21 @@ return
 
             {
                 if ($q = "") then
-                    <div class="alert alert-secondary">
-                        Please enter a search term.
-                    </div>
-
+                    <div class="alert alert-secondary">Please enter a search term.</div>
                 else
                     let $hits :=
-                        collection($letters)//*[self::tei:text
-                                                or self::tei:p
-                                                or self::tei:opener
-                                                or self::tei:closer
-                                                or self::tei:salute
-                                                or self::tei:persName
-                                                or self::tei:placeName
-                                                or self::tei:note][ft:query(., $q)]
+                        collection($letters)//tei:TEI[
+                            normalize-space(.//tei:body) != ""
+                            and .//tei:body[ft:query(., $q)]
+                        ]
                     return
                         <div>
                             <h2>Results for “{$q}”</h2>
-
-                            <p>
-                                {count($hits)} hit(s)
-                            </p>
+                            <p>{count($hits)} hit(s)</p>
 
                             {
                                 if (empty($hits)) then
-                                    <div class="alert alert-warning">
-                                        No results found.
-                                    </div>
+                                    <div class="alert alert-warning">No results found.</div>
                                 else
                                     <table class="table table-striped">
                                         <thead>
@@ -338,23 +315,25 @@ return
                                         </thead>
                                         <tbody>
                                         {
-                                            for $hit in $hits
-                                            let $letter := root($hit)
-                                            let $id := string($letter/tei:TEI/@xml:id)
+                                            for $letter in $hits
+                                            let $context := ($letter//tei:body[ft:query(., $q)])[1]
+                                            let $id := string(($letter/@xml:id, $letter/@id)[1])
                                             let $title := local:title-string(($letter//tei:title[@level = "a"])[1])
-                                            let $score := ft:score($hit)
+                                            let $score := ft:score($context)
                                             order by $score descending
                                             return
                                                 <tr>
                                                     <td>{format-number($score, "0.000")}</td>
-                                                    <td>{
-                                                        kwic:summarize(
-                                                            $hit,
-                                                            <config width="40"/>
-                                                        )
-                                                    }</td>
+                                                    <td>{kwic:summarize($context, <config width="40"/>)}</td>
                                                     <td>
-                                                        <a href="tei2html.xq?id={$id}">{$title}</a>
+                                                        {
+                                                            if ($id != "") then
+                                                                <a href="tei2html.xq?id={$id}">
+                                                                    {if ($title != "") then $title else $id}
+                                                                </a>
+                                                            else
+                                                                <span class="text-muted">No xml:id found</span>
+                                                        }
                                                     </td>
                                                 </tr>
                                         }
@@ -364,13 +343,12 @@ return
                         </div>
             }
         </main>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
 ```
+# Lucene Volltextsuche
 
-## Collection (collection.xconf)
+## Indexkonfiguration (collection.xconf)
 Elemente angeben, in denen gesucht werden soll
 
 ```
