@@ -348,6 +348,9 @@ return
 ```
 # Lucene Volltextsuche
 
+Lucene ist eine Suchmaschine-Bibliothek: Sie zerlegt Text in Wörter/Tokens, normalisiert sie über einen Analyzer 
+und baut daraus einen Index, damit ft:query() in eXist-db schnell über den gesamten Text suchen kann. 
+
 ## Indexkonfiguration (collection.xconf)
 Elemente angeben, in denen gesucht werden soll
 
