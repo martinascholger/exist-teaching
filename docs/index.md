@@ -27,16 +27,13 @@ Geschichte und Entwicklung, Übersicht über die Features, …
 
 Einführung in XPath: Achsen, Bedingungen, Funktionen 
 
-#### [Einführung in XQuery](xquery.md)
+#### [Einführung in XQuery, part 1](xquery.md)
 
 Einführung in XQuery: Datenmodell, Sequenzen, FLOWR-Ausdrücke 
 
-#### [XQuery, part 2](xquery4.md)
 
-Serialization und Output-Options, Funktionen, Module und Dokumentation mit xqDoc, mRequest-Modul und XSLT-Transformationen 
-
-#### [XQuery, part 3](xquery5.md)
-Lucene-Volltextsuche
+#### [XQuery, part 2](xquery5.md)
+Listen erstellen, XSLT Transformer, Lucene-Volltextsuche
 
 #### [Oxygen](oxygen.md)
 Exist and Oxygen anbinden
