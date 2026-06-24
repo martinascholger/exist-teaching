@@ -17,118 +17,177 @@ declare option output:indent "yes";
 declare option output:omit-xml-declaration "yes";
 ```
 
-## Briefmetadaten als HTML-Tabelle ausgeben
+
+## controller.xq
+```xquery
+xquery version "3.1";
+
+declare variable $exist:path external;
+
+if ($exist:path eq "/" or $exist:path eq "") then
+    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+        <redirect url="index.xq"/>
+    </dispatch>
+else
+    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+        <cache-control cache="yes"/>
+    </dispatch>
+    
+
+```
+
+## index.xq
+```xquery
+xquery version "3.1";
+
+declare namespace tei="http://www.tei-c.org/ns/1.0";
+declare namespace output="http://www.w3.org/2010/xslt-xquery-serialization";
+
+declare option output:method "html";
+declare option output:media-type "text/html";
+declare option output:indent "yes";
+
+declare variable $letters := "/db/apps/WeGA-data/letters";
+
+declare function local:title-string($title as element(tei:title)?) as xs:string {
+    normalize-space(
+        string-join(
+            for $node in $title/node()
+            return
+                if (local-name($node) = "lb") then " "
+                else string($node),
+            ""
+        )
+    )
+};
+
+<html>
+    <head>
+        <title>WeGA Data</title>
+    </head>
+    <body>
+        <h1>WeGA Data</h1>
+
+        <nav>
+            <a href="index.xq">Letters</a> |
+            <a href="search.xq">Search</a>
+        </nav>
+
+        <h2>Letters</h2>
+
+        <ul>
+        {
+            for $letter in collection($letters)
+            let $id := string($letter/tei:TEI/@xml:id)
+            let $title := ($letter//tei:title[@level = "a"])[1]
+            let $title-string := local:title-string($title)
+            where $id != "" and $title-string != ""
+            order by $title-string
+            return
+                <li>
+                    <a href="tei2html.xq?id={$id}">{$title-string}</a>
+                </li>
+        }
+        </ul>
+    </body>
+</html>
+
+```
+
+### Aufruf
+```xquery
+http://localhost:8080/exist/apps/WeGA-data/index.xq
+```
+
+## tei2html.xq
+
+Diese Seite erhält die Letter ID aus der URL und transformiert das entsprechende TEI mit der Dataei tei2html.xsl.
 
 ```xquery
 xquery version "3.1";
 
-(:
- : Namespace declarations
- :)
-declare namespace ess="https://exist.edirom.de";
-declare namespace xhtml="http://www.w3.org/1999/xhtml";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
-declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
+declare namespace output="http://www.w3.org/2010/xslt-xquery-serialization";
+declare namespace transform="http://exist-db.org/xquery/transform";
 
-declare option output:method "xhtml";
+declare option output:method "html";
 declare option output:media-type "text/html";
 declare option output:indent "yes";
-declare option output:omit-xml-declaration "yes";
 
-(:~
- : Return an HTML table of letters, a letter per row.
- : Calls ess:letter2tr#1 to process the individual letter
- : 
- : @param $letters the TEI letters to process
- : @return the table (xhtml:table) with one row for every letter
- :)
-declare function ess:letters2table($letters as document-node()*) as element(xhtml:table) {
-    <xhtml:table><xhtml:tbody>{
-        $letters ! ess:letter2tr(.)
-    }</xhtml:tbody></xhtml:table>
-};
+declare variable $letters := "/db/apps/WeGA-data/letters";
+declare variable $xsl := "/db/apps/WeGA-data/tei2html.xsl";
 
-(:~
- : Return an HTML table row with information about a letter.
- : The cells provide the ID, the sender, the addressee and the date (in this sequence)
- : 
- : @param $letter the TEI letter to process
- : @return the table row (xhtml:tr)
- :)
-declare function ess:letter2tr($letter as document-node()?) as element(xhtml:tr)? {
-    let $id := $letter/tei:TEI/@xml:id => string()
-    let $sender := ($letter//tei:correspAction[@type='sent']/tei:persName)[1] => normalize-space()
-    let $addressee := ($letter//tei:correspAction[@type='received']/tei:persName)[1] => normalize-space()
-    return
-        if($sender or $addressee)
-        then
-            <xhtml:tr>
-                <xhtml:td>{$id}</xhtml:td>
-                <xhtml:td>{$sender}</xhtml:td>
-                <xhtml:td>{$addressee}</xhtml:td>
-            </xhtml:tr>
-        else()
-};
+let $id := request:get-parameter("id", "")
+let $letter := collection($letters)[tei:TEI/@xml:id = $id][1]
 
-collection('/db/apps/WeGA-data/letters') => ess:letters2table()
+return
+<html>
+    <head>
+        <title>{if ($letter) then string(($letter//tei:title[@level = "a"])[1]) else "Letter not found"}</title>
+    </head>
+    <body>
+        <nav>
+            <a href="index.xq">Letters</a> |
+            <a href="search.xq">Search</a>
+        </nav>
+
+        {
+            if ($id = "") then
+                <p>No letter ID was provided.</p>
+
+            else if (empty($letter)) then
+                <p>No letter found for ID: <code>{$id}</code></p>
+
+            else
+                transform:transform(
+                    $letter,
+                    doc($xsl),
+                    ()
+                )
+        }
+    </body>
+</html>
 ```
 
-## Eigene XQuery Funktionen
-
-Eigene Funktionen werden mit `declare function` definiert. 
-Die "Function-Signature" beschreibt darüber hinaus den Namen (mit namespace), 
-die Parameter und einen (optionalen) Rückgabewert. 
-Die Datentypen inkl. Quantifizierer der Parameter und des Rückgabewerts sind 
-optional, es wird aber dringlichst empfohlen (von Peter), diese anzugeben.
+Testaufruf: http://localhost:8080/exist/apps/WeGA-data/tei2html.xq?id=A041627
 
 
-## Map und arrow operator
+## tei2html.xsl
 
-* A mapping expression `S!E` evaluates the expression `E` once for every item 
-  in the sequence obtained by evaluating `S`. 
-  (<https://www.w3.org/TR/xquery-31/#id-map-operator>)
-* An arrow operator applies a function to the value of an expression, using 
-  the value as the first argument to the function.
-  (<https://www.w3.org/TR/xquery-31/#id-arrow-operator>)
+```
+<xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:math="http://www.w3.org/2005/xpath-functions/math" exclude-result-prefixes="tei xs math" version="3.0">
+    
+    <xsl:template match="/">
+        <div>
+            <xsl:apply-templates select="tei:TEI/tei:text/tei:body/tei:div[@type='writingSession']"/>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="tei:opener | tei:closer | tei:p">
+        <p>
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
+    
+    <xsl:template match="tei:choice">
+        <xsl:apply-templates select="tei:expan"/>
+    </xsl:template>
+    
+    <xsl:template match="tei:abbr"/>
+    
+    <xsl:template match="tei:persName">
+        <a href="{@ref}">
+            <xsl:apply-templates/>
+        </a>
+    </xsl:template>
+    
 
+</xsl:stylesheet>
 
-## Übung
-
-Ergänzt die Tabelle um Datumsangaben und Orte
-
-
-## XQuery Module
-
-Funktionen lassen sich in XQuery Module auslagern und können dann von 
-beliebigen XQueries (oder anderen Modulen) importiert und aufgerufen werden.
-XQuery Module sind dabei nicht mehr selbst ausführbar, d.h. sie dürfen auch 
-keine Ausgabe mehr haben, sondern stellen nur Funktionen und Variablen zur 
-Verfügung.
-
-Module werden durch die Angabe eines "Module Namespace" deklariert:
-```xquery
-module namespace ess="https://exist.edirom.de";
 ```
 
-In einem anderen XQuery wird dieses Modul dann folgendermaßen eingebunden:
-```xquery
-import module namespace ess="https://exist.edirom.de" at "letters.xqm";
-```
 
-Module können auch direkt online per URL eingebunden werden:
-```xquery
-import module namespace functx="http://www.functx.com" at "http://www.datypic.com/xq/functx-1.0.1-nodoc.xq";
-```
 
-## Modulvariablen
-
-Diese müssen – wie Funktionen – ein Namespaceprefix besitzen und mit einem 
-Semikolon abgeschlossen werden. 
-Die Angabe des Datentyps ist fakultativ.  
-
-```xquery
-declare variable $ess:year as xs:integer := 2024;
-```
 
 ## Links
 
