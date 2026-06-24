@@ -141,6 +141,88 @@ Diese Ausgabe kann dann z.B. in einem Google Diagramm als Quelle genutzt werden:
 </html>
 ```
 
+## Lucene Volltextsuche
+
+### Index-Konfiguration
+
+Diese muss unterhalb `/db/system/config/apps` abgelegt werden, den Pfad der 
+zu indizierenden Collection spiegelnd.
+
+```xml
+<collection xmlns="http://exist-db.org/collection-config/1.0">
+    <!-- Index-Einträge für letters -->
+    <index xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <range>
+            <!-- EInträge für den Range-Index -->
+        </range>
+        <fulltext default="none" attributes="false"/>
+        <lucene diacritics="no">
+            <analyzer class="org.exist.indexing.lucene.analyzers.NoDiacriticsStandardAnalyzer">
+                <param name="stopwords" type="org.apache.lucene.analysis.util.CharArraySet"/>
+            </analyzer>
+            <text qname="tei:correspDesc" boost="2.0"/>
+            <text qname="tei:body"/>
+            <text qname="tei:note"/>
+            <text qname="tei:title" boost="2.0"/>
+            <text qname="tei:TEI">
+                <ignore qname="tei:publicationStmt"/>
+                <ignore qname="tei:seriesStmt"/>
+                <ignore qname="tei:encodingDesc"/>
+                <ignore qname="tei:profileDesc"/>
+                <ignore qname="tei:revisionDesc"/>
+                <ignore qname="tei:respStmt"/>
+                <ignore qname="tei:editor"/>
+            </text>
+            <inline qname="tei:hi"/>
+            <inline qname="tei:lb"/>
+            <inline qname="tei:pb"/>
+            <inline qname="tei:cb"/>
+            <inline qname="tei:supplied"/>
+        </lucene>
+    </index>
+</collection>
+```
+
+### Abfragen
+
+```xquery
+xquery version "3.1";
+
+declare namespace tei="http://www.tei-c.org/ns/1.0";
+declare namespace ft="http://exist-db.org/xquery/lucene";
+
+collection('/db/apps/WeGA-data/letters')//tei:note/ft:query(., 'Himmel')
+```
+
+### KWIC-Index
+
+```xquery
+ xquery version "3.1";
+
+declare namespace tei="http://www.tei-c.org/ns/1.0";
+declare namespace ft="http://exist-db.org/xquery/lucene";
+
+import module namespace kwic="http://exist-db.org/xquery/kwic";
+
+for $hit in collection('/db/apps/WeGA-data/letters')//tei:note/ft:query(., 'Himmel')
+order by ft:score($hit) descending
+return
+    kwic:summarize($hit, <config width="40"/>)
+```
+
+### Erweiterung der Briefliste
+
+```xquery
+(: Abfragen des Query-Parameters :)
+let $query := request:get-parameter("q", ())
+(: Durchsuchen der Collection :)
+for $letter in collection('/db/apps/WeGA-data/letters')/tei:TEI/ft:query(., $query)/root()
+(: Ergänzen eines Input-Feldes :)
+<form>
+    <input type="text" name="q" value="{$query}"/>
+</form>
+```
+
 ## Links
 
 * Abschnitt "Maps and Arrays" in der 

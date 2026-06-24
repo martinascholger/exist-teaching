@@ -26,27 +26,32 @@ Geschichte und Entwicklung, Übersicht über die Features, …
 #### [Einführung in XPath](xpath.md)
 Einführung in XPath: Achsen, Bedingungen, Funktionen 
 
-#### [Einführung in XQuery, part 1](xquery.md)
+#### [Einführung in XQuery](xquery.md)
 Einführung in XQuery: Datenmodell, Sequenzen, FLOWR-Ausdrücke, Dateiendungs-Konventionen
 
-#### [Erste XQuery Beispiele](xquery1.md)
+#### [Erste XQuery Beispiele: Brieflisten](xquery1.md)
 Erste Beispiele: Funktion collection(), Übersetzung in FLOWR, Brieftitel ausgeben, Verlinkung auf Einzelbriefe 
 
-#### [Projekt in Exist umsetzen, Teil 1](xquery2.md)
+#### [Exist: Serialisieerung](xquery2.md)
 Serialisierung und Output Optionen, XSLT Transformer
 
-#### [Projekt in Exist umsetzen, Teil 2: Volltextsuche](xquery6.md)
-Lucene-Volltextsuche
+#### [Exist: Suche](xquery6.md)
+Suche einrichten, Lucene-Volltextsuche, KWIC
 
-#### [Projekt in Exist umsetzen, Teil 3: Bootstrap](xquery5.md)
+#### [Exist: Bootstrap integrieren](xquery5.md)
 CSS-Framework Boostrap verwenden
 
-#### [Projekt in Exist umsetzen, Teil 4: Feinabstimmung, Applikation herunterlagen](xquery7.md)
+
+#### [Exist: Maps und Arrays, JSON-Ausgabe, Google Diagram](xquery4.md)
+
+#### [Exist: Feinabstimmung, Applikation herunterlagen](xquery7.md)
 
 
 
 
 #### [Oxygen verwenden](oxygen.md)
 Oxygen an eXist-db anbinden
+
+
 
 
