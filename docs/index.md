@@ -17,6 +17,15 @@ Die zur Verfügung gestellten Materialien basieren auf dem eXist-DB Workshop bei
 ### Kursmaterialien
 
 * Datenpaket: siehe Moodle-Kurs WeGA-data-4.11.0.xar
+* Upload über den Package-Manager (Menü links)
+* Zentrale Dateien für die Applikation, die bei Neuanlage einer Applikation vorhanden sein und an die eigene Applikation angepasst werden müssen
+    - **repo.xml**: enthält Metadaten zur Anwendung. 
+    - **WeGa-data-pre-install.xql**: Ein Skript, das vor der Installation des Pakets ausgeführt wird.
+    - **expath-pkg.xml**: Beschreibt das Paket nach dem EXPath-Package-Standard. Die Datei definiert unter anderem den Paketnamen, die Version und den Einstiegspunkt der Anwendung.
+ 
+In `repo.xml` verweist `<prepare>` auf das Pre-Install-Skript. Der Dateiname `WeGA-data-pre-install.xql` muss daher genau mit dem tatsächlichen Dateinamen übereinstimmen.
+Der Wert in `<target>WeGA-data</target>` bestimmt, in welche Collection die App in eXist-db installiert wird.  
+    
 
 ### Themen
 

@@ -25,7 +25,10 @@ auf dem Dashboard angezeigt wird.
 ## Applikation exportieren
 Dazu muss über eXide eine Datei aus der WeGA-Applikation geöffnet sein (z.B. `repo.xml`). Über `Application > Download app` wird die Applikation als `.xar` heruntergeladen. 
 
-## 
+## Applikation in Exist hochladen
+Eine Applikation im Format .xar wird über den Packagemanager hochgeladen (siehe Menü in eXist auf der linken Seite). Dazu muss 
+die .xar-Datei in den Upload-Bereich gezogen werden. Achtung: der Upload kann eine Weile dauern. Am besten in der Zwischenzeit
+einen Kaffee trinken :-) Die Applikation wird nach Abschluss des Uploads am Desktop angezeigt. 
 
 
 
