@@ -17,7 +17,7 @@ insgesamt zur Suchanfrage passt. Je höher der Score, desto relevanter wird das 
 In `search.xq` werden die Treffer anhand dieses Wertes absteigend sortiert (`order by $score descending`), 
 sodass die wahrscheinlich passendsten Ergebnisse zuerst angezeigt werden.
 
-```
+```xquery
 xquery version "3.1";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
@@ -139,7 +139,7 @@ In `search.xq` wird festgelegt, in welchem Bereich der Dokumente die Suche ausge
 Beide Angaben müssen nicht identisch sein, werden hier aber bewusst auf den Textinhalt der Briefe beschränkt.
 
 
-```
+```xquery
 
 <collection xmlns="http://exist-db.org/collection-config/1.0">
     <index xmlns:tei="http://www.tei-c.org/ns/1.0">
@@ -159,7 +159,7 @@ Beide Angaben müssen nicht identisch sein, werden hier aber bewusst auf den Tex
 Das Skript erstellt den Suchindex der Sammlung. Dadurch werden Änderungen an der Indexkonfiguration oder an den TEI-Dokumenten in den Lucene-Index übernommen. 
 Dazu muss das Skript über den eXide-Editor explizit über den Button `Eval` ausgeführt werden.  
 
-```
+```xquery
 xmldb:reindex("/db/apps/WeGA-data/letters")
 ```
 

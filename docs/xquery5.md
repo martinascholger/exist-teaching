@@ -1,10 +1,24 @@
 # Bootstrap
 
+Bootstrap ist ein frei verfügbares CSS- und JavaScript-Framework zur Gestaltung responsiver Weboberflächen. 
+Es stellt vordefinierte Layouts, Komponenten und CSS-Klassen bereit, mit denen sich Webseiten ohne 
+eigenes umfangreiches CSS schnell und konsistent gestalten lassen.
+
+Bootstrap wird im `<head>` über eine CSS-Datei eingebunden und kann anschließend durch Klassen wie `container`, `navbar`, 
+`list-group` oder `list-group-item` direkt im HTML verwendet werden. 
+Das zusätzliche JavaScript-Bundle am Ende des `<body>` aktiviert interaktive Komponenten wie Navigationsmenüs, 
+Dropdowns oder Modalfenster.
+
+Durch die Verwendung von Bootstrap erhält die eXist-db-Anwendung eine strukturierte Navigation, 
+ein responsives Layout und eine optisch ansprechendere Darstellung der Brieflisten.
+
+Weitere Informationen: [Bootstrap – The most popular HTML, CSS, and JavaScript framework](https://getbootstrap.com/)
+
+
 ## Bootstrap zum "Stylen" der Seite hinzufügen: index.xq (und in allen weiteren Files)
 
-Im HTML head
 
-```
+```xml
 <head>
     <title>WeGA Data</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -13,7 +27,7 @@ Im HTML head
 ```
 Im HTML body
 
-```
+```xquery
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom mb-4">
         <div class="container">

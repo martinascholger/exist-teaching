@@ -170,7 +170,7 @@ http://localhost:8080/exist/apps/WeGA-data/tei2html.xq?id=A041627
 Die XSLT-Datei `tei2html.xsl` transformiert ausgewählte Inhalte eines TEI-Briefes in HTML. Es handelt sich um eine sehr verkürztes XSLT, das entsprechend ausgeweitet werden muss, um alle Strukturen zu berücksichtigen und eine valide HTML-Ausgabe (inklusive `<head>` und `<body>`) zu erzeugen.  
 Ausgabe der Schreibsitzungen (writingSession), Absätze, Opener und Closer in HTML-<p>-Elementen, Abkürzungen durch ihre ausgeschriebene Form ersetzt und Personennamen als anklickbare Links dargestellt.
 
-```
+```xml
 <xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:math="http://www.w3.org/2005/xpath-functions/math" exclude-result-prefixes="tei xs math" version="3.0">
     
     <xsl:template match="/">
