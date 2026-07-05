@@ -16,7 +16,7 @@ Die zur Verfügung gestellten Materialien basieren auf dem eXist-DB Workshop bei
 
 ### Kursmaterialien
 
-* Datenpaket
+* Datenpaket: siehe Moodle-Kurs WeGA-data-4.11.0.xar
 
 ### Themen
 
@@ -32,7 +32,7 @@ Einführung in XQuery: Datenmodell, Sequenzen, FLOWR-Ausdrücke, Dateiendungs-Ko
 #### [Erste XQuery Beispiele: Brieflisten](xquery1.md)
 Erste Beispiele: Funktion collection(), Übersetzung in FLOWR, Brieftitel ausgeben, Verlinkung auf Einzelbriefe 
 
-#### [Exist: Serialisieerung](xquery2.md)
+#### [XQuery: Teil 2](xquery2.md)
 Serialisierung und Output Optionen, XSLT Transformer
 
 #### [Exist: Suche](xquery6.md)
@@ -41,15 +41,13 @@ Suche einrichten, Lucene-Volltextsuche, KWIC
 #### [Exist: Bootstrap integrieren](xquery5.md)
 CSS-Framework Boostrap verwenden
 
-
 #### [Exist: Maps und Arrays, JSON-Ausgabe, Google Diagram](xquery4.md)
+Alternative Ausgabeformate (JSON) erzeugen und Daten grafisch mit Google Diagram darstellen.
 
-#### [Exist: Feinabstimmung, Applikation herunterlagen](xquery7.md)
+#### [Exist: Feinabstimmung](xquery7.md)
+Applikation zum Export vorbereiten, exportieren und erneut in eXist-db bereitstellen. 
 
-
-
-
-#### [Oxygen verwenden](oxygen.md)
+#### [Oxygen und eXist](oxygen.md)
 Oxygen an eXist-db anbinden
 
 

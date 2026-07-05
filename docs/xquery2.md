@@ -1,6 +1,6 @@
-# XQuery, part 2
+# XQuery, Teil 2
 
-## Serialization und output options
+## Serialisierung und Output-Optionen
 
 Definiert sind die Methoden "XML", "(X)HTML", "JSON", "Text" und "Adaptive".
 eXist unterstützt darüber hinaus die proprietäre Methode "HTML5".
@@ -19,6 +19,12 @@ declare option output:omit-xml-declaration "yes";
 
 
 ## controller.xq
+- Der Controller prüft den angeforderten Pfad (`$exist:path`). 
+- Wird das Wurzelverzeichnis (/) aufgerufen, erfolgt eine Weiterleitung zur Datei `index.xq`.
+- Befindet sich die `index.xq` in einem Untersverzeichnis, muss der Pfad im redirect entsprechend angegeben werden. 
+- Beispiel: der Aufruf `http://localhost:8080/exist/apps/WeGA-data/` führt direkt zu `http://localhost:8080/exist/apps/WeGA-data/index.xq`.
+- Die Datei `controller.xq` wird im Rootverzeichnis der App gespeichert. 
+
 ```xquery
 xquery version "3.1";
 
@@ -37,6 +43,10 @@ else
 ```
 
 ## index.xq
+Das XQuery-Skript erzeugt eine HTML-Startseite für eXist-db. Es liest alle TEI-Briefe aus der WeGA-Sammlung, extrahiert deren IDs und Titel, sortiert die Briefe alphabetisch und gibt sie als verlinkte Liste aus. Zusätzlich wird eine Navigationsleiste zu den Seiten „Letters“ und „Search“ erzeugt. 
+
+Die `index.xq` kann im Rootverzeichnis oder einem Unterverzeichnis der App gespeichert werden. Im Fall der Speicherung in einem Unterverzeichnis, muss der Pfad im Controller entsprechend angepasst werden. 
+
 ```xquery
 xquery version "3.1";
 
@@ -94,14 +104,14 @@ declare function local:title-string($title as element(tei:title)?) as xs:string 
 
 ```
 
-### Aufruf
+Testaufruf der Indexdatei
 ```xquery
 http://localhost:8080/exist/apps/WeGA-data/index.xq
 ```
 
 ## tei2html.xq
 
-Diese Seite erhält die Letter ID aus der URL und transformiert das entsprechende TEI mit der Dataei tei2html.xsl.
+`tei2html.xq` liest die über die URL übergebene Brief-ID (id) aus, sucht das entsprechende TEI-Dokument in der Briefsammlung und transformiert es mithilfe der XSLT-Datei `tei2html.xsl` in HTML. Die Transformation wird über die Funktion `transform:transform($letter, doc($xsl), ())` aufgerufen. Dabei wird das gefundene TEI-Dokument `($letter)` als Eingabe an die geladene XSLT-Datei `(doc($xsl))` übergeben; der dritte Parameter dient der Übergabe optionaler XSLT-Parameter und bleibt hier leer. Falls keine oder eine ungültige ID übergeben wird, wird eine entsprechende Fehlermeldung angezeigt.
 
 ```xquery
 xquery version "3.1";
@@ -149,10 +159,16 @@ return
 </html>
 ```
 
-Testaufruf: http://localhost:8080/exist/apps/WeGA-data/tei2html.xq?id=A041627
+Testaufruf eines Briefes: 
+```xquery
+http://localhost:8080/exist/apps/WeGA-data/tei2html.xq?id=A041627
+```
 
 
 ## tei2html.xsl
+
+Die XSLT-Datei `tei2html.xsl` transformiert ausgewählte Inhalte eines TEI-Briefes in HTML. Es handelt sich um eine sehr verkürztes XSLT, das entsprechend ausgeweitet werden muss, um alle Strukturen zu berücksichtigen und eine valide HTML-Ausgabe (inklusive `<head>` und `<body>`) zu erzeugen.  
+Ausgabe der Schreibsitzungen (writingSession), Absätze, Opener und Closer in HTML-<p>-Elementen, Abkürzungen durch ihre ausgeschriebene Form ersetzt und Personennamen als anklickbare Links dargestellt.
 
 ```
 <xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:math="http://www.w3.org/2005/xpath-functions/math" exclude-result-prefixes="tei xs math" version="3.0">

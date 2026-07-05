@@ -1,7 +1,21 @@
-# eXist: Suche einrichten
+# eXist: Lucene Volltextsuche einrichten
 
+Lucene ist eine Java-basierte Volltextsuche. Sie zerlegt Texte in einzelne Wörter (Tokens), analysiert und normalisiert diese
+und erstellt daraus einen Suchindex. Dadurch können Suchanfragen mit `ft:query()` schnell und effizient 
+ausgeführt sowie Treffer nach ihrer Relevanz bewertet und sortiert werden. 
 
 ## Search (search.xq) 
+
+`search.xq` stellt ein Suchformular bereit und liest den eingegebenen Suchbegriff aus. 
+Mit `ft:query()` wird anschließend in den TEI-Dokumenten nach diesem Begriff gesucht. 
+Die Treffer werden nach Relevanz sortiert und zusammen mit einem kurzen Textausschnitt (KWIC - Keyword in Context) 
+sowie einem Link zum entsprechenden Brief angezeigt.
+
+Die Relevanz eines Treffers wird von Lucene automatisch berechnet und mit `ft:score()` ausgelesen. 
+Der Score berücksichtigt unter anderem, wie häufig der Suchbegriff im Dokument vorkommt und wie gut das Dokument 
+insgesamt zur Suchanfrage passt. Je höher der Score, desto relevanter wird das Dokument eingestuft. 
+In `search.xq` werden die Treffer anhand dieses Wertes absteigend sortiert (`order by $score descending`), 
+sodass die wahrscheinlich passendsten Ergebnisse zuerst angezeigt werden.
 
 ```
 xquery version "3.1";
@@ -112,13 +126,18 @@ return
     </body>
 </html>
 ```
-# Lucene Volltextsuche
-
-Lucene ist eine Suchmaschine-Bibliothek: Sie zerlegt Text in Wörter/Tokens, normalisiert sie über einen Analyzer 
-und baut daraus einen Index, damit ft:query() in eXist-db schnell über den gesamten Text suchen kann. 
 
 ## Indexkonfiguration (collection.xconf)
-Elemente angeben, in denen gesucht werden soll
+
+In `collection.xconf` wird festgelegt, welche Teile der TEI-Dokumente von Lucene indiziert werden. 
+Durch `<text qname="tei:text"/>` werden die Inhalte des Elements `tei:text` in den Suchindex aufgenommen. 
+Nach Änderungen an der Konfiguration muss die Sammlung mit `xmldb:reindex()` neu indiziert werden.
+
+Der XPath in `collection.xconf` und in `search.xq` erfüllt dabei unterschiedliche Aufgaben: 
+In `collection.xconf` wird definiert, welche Inhalte überhaupt in den Suchindex aufgenommen werden. 
+In `search.xq` wird festgelegt, in welchem Bereich der Dokumente die Suche ausgeführt und die Treffer ermittelt werden. 
+Beide Angaben müssen nicht identisch sein, werden hier aber bewusst auf den Textinhalt der Briefe beschränkt.
+
 
 ```
 
@@ -137,9 +156,57 @@ Elemente angeben, in denen gesucht werden soll
 
 ## Reindexieren (reindex.xq)
 
+Das Skript erstellt den Suchindex der Sammlung. Dadurch werden Änderungen an der Indexkonfiguration oder an den TEI-Dokumenten in den Lucene-Index übernommen. 
+Dazu muss das Skript über den eXide-Editor explizit über den Button `Eval` ausgeführt werden.  
+
 ```
 xmldb:reindex("/db/apps/WeGA-data/letters")
 ```
+
+## Erweiterte Indexkonfiguration
+
+Mit einer erweiterten Indexkonfiguration können die Suchtreffer verbessert werden. Mit dem `NoDiacriticsStandardAnalyzer` werden diakritische Zeichen ignoriert, wodurch die 
+Suche roleranter gegenüber unterschiedlichen Schreibweisen wird. Über die `<text>`-Elemente wird festgelegt, welche TEI-Bereiche 
+indiziert werden. Die Elemente `tei:correspDesc` und `tei:title` erhalten mit `boost="2.0"` eine höhere Gewichtung und werden bei der 
+Relevanzberechnung stärker berücksichtigt. Innerhalb von `tei:TEI` werden bestimmte Metadatenbereich durch `ignore` von der Indizierung ausgeschlossen. 
+Die `<inline>`-Elemente definieren TEI-Elemente, die beim Indizieren als Teil des fortlaufenden Textes behandelt werden. 
+
+
+```xml
+<collection xmlns="http://exist-db.org/collection-config/1.0">
+    <!-- Index-Einträge für letters -->
+    <index xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <range>
+            <!-- EInträge für den Range-Index -->
+        </range>
+        <fulltext default="none" attributes="false"/>
+        <lucene diacritics="no">
+            <analyzer class="org.exist.indexing.lucene.analyzers.NoDiacriticsStandardAnalyzer">
+                <param name="stopwords" type="org.apache.lucene.analysis.util.CharArraySet"/>
+            </analyzer>
+            <text qname="tei:correspDesc" boost="2.0"/>
+            <text qname="tei:body"/>
+            <text qname="tei:note"/>
+            <text qname="tei:title" boost="2.0"/>
+            <text qname="tei:TEI">
+                <ignore qname="tei:publicationStmt"/>
+                <ignore qname="tei:seriesStmt"/>
+                <ignore qname="tei:encodingDesc"/>
+                <ignore qname="tei:profileDesc"/>
+                <ignore qname="tei:revisionDesc"/>
+                <ignore qname="tei:respStmt"/>
+                <ignore qname="tei:editor"/>
+            </text>
+            <inline qname="tei:hi"/>
+            <inline qname="tei:lb"/>
+            <inline qname="tei:pb"/>
+            <inline qname="tei:cb"/>
+            <inline qname="tei:supplied"/>
+        </lucene>
+    </index>
+</collection>
+```
+
 
 
 ## Links

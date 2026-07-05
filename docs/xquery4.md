@@ -16,6 +16,8 @@ Unlike sequences, an array is an item, and can appear as an item in a
 sequence." 
 ([XQuery 3.1 Spezifikation](https://www.w3.org/TR/xquery-31/#id-maps-and-arrays))
 
+Maps speichern Daten als Schlüssel-Wert-Paare und eignen sich für strukturierte Informationen, während Arrays geordnete Listen von Werten darstellen. Beide Datentypen erleichtern die Verarbeitung und Ausgabe komplexer Datenstrukturen, insbesondere bei der Erzeugung von JSON.
+
 ### Beispiele
 
 ```xquery
@@ -50,9 +52,13 @@ return (
 )
 ```
 
-## JSON Ausgabe
+## JSON Ausgabe (charts.xq)
 
 Ausgabe eines JSON-Arrays mit der Verteilung der 10 häufigsten Briefschreiber:
+Die Daten werden dabei zunächst gruppiert, nach der Anzahl der Briefe sortiert und anschließend als JSON-Array serialisiert. 
+JSON eignet sich besonders für die Weiterverarbeitung in Webanwendungen und für die Übergabe von Daten an JavaScript-basierte Visualisierungen.
+
+
 
 ```xquery
 xquery version "3.1";
@@ -74,6 +80,7 @@ array {
 ```
 
 Diese Ausgabe kann dann z.B. in einem Google Diagramm als Quelle genutzt werden:
+Das Diagramm lädt die JSON-Daten per `fetch()` aus `charts.xq`, wandelt sie in das von [Google Charts](https://developers.google.com/chart) erwartete Tabellenformat um und erzeugt daraus ein interaktives Balkendiagramm. Auf diese Weise lassen sich XQuery-Abfragen direkt als grafische Auswertungen im Browser darstellen.
 
 ```html
 <?xml version="1.0" encoding="UTF-8"?>

@@ -57,14 +57,15 @@ himself: eXist." (Siegel/Retter 2015, p.5)
 
 ## Installation des Datenpakets
 
-* Das Datenpaket kann über den folgenden Link geladen werden:
-    <https://weber-gesamtausgabe.de/downloads/WeGA-data-4.11.0.xar>
-* Das Paket dann im Package Manager hochladen
+* Das Datenpaket steht im Moodle-Kurs zur Verfügung: 
+   - WeGA-data-4.11.0.xar
+* Das Paket dann im Package Manager hochladen:
+    - eXist starten und einloggen
+    - Zum Package Manager wechseln
+    - .xar in den Upload-Bereich ziehen und hochladen 
 * [Bei Interesse:] Die Erstellung des Datenpakets ist unter 
     <https://github.com/martinascholger/exist-edirom2024/blob/main/scripts/obtain-data-xar.sh> 
     
-    
- * Datenpaket Google Drive (https://drive.google.com/drive/folders/1K8A4hyQGLs-l-5m2qrCtsjZzI5qS0K7q?usp=sharing)
 
 ## Some Links
 
